@@ -18,20 +18,11 @@
       <button class="page-button" @click="nextPage" :disabled="currentPage === maxPage">Next</button>
     </div>
     </ul>
-    <dog-details
+    <DogDetails
       v-if="selectedDog"
-      :dog="selectedDog"
-      :admin="admin"
+      :dog="selectedDog" 
       @close="selectedDog = null"
-    ></dog-details>
-    <div v-if="admin">
-      <h3>Timeline</h3>
-      <ul>
-        <li v-for="event in selectedDog.timeline" :key="event.id">
-          {{ event.date }}: {{ event.description }}
-        </li>
-      </ul>
-    </div>
+    ></DogDetails> 
   </div>
 </template>
 
@@ -46,12 +37,12 @@ export default {
   data() {
       return {
         dogs: [],
+        images: [],
         selectedDog: null,
         selectedBreed:"", 
         breeds: [], 
         currentPage: 1,
-        itemsPerPage: 10,
-        admin: false
+        itemsPerPage: 10, 
       }
     },
     computed: {
@@ -72,25 +63,21 @@ export default {
       }
     },
   created() {
-    axios.get('https://api.thedogapi.com/v1/breeds/')
-      .then(response => {
-        this.dogs = response.data;
-        this.breeds = Array.from(new Set(this.dogs.map(dog => dog.breed_group)));
-      })
-      .catch(error => {
-        console.log(error);
-      });  
-     //this.admin = true;
-    
-    axios.get('https://api.thedogapi.com/v1/images/')
-      .then(response => {
-        this.dogs = response.data;
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    this.getDogs(); 
   },
   methods: { 
+    getDogs() {
+      axios.get('https://api.thedogapi.com/v1/breeds/')
+        .then(response => {
+          this.dogs = response.data;
+          this.breeds = Array.from(new Set(this.dogs.map(dog => dog.breed_group)));
+        })
+        .catch(error => {
+          console.log(error);
+        });  
+      //this.admin = true;
+    }, 
+    
     viewDetails(dog) {
       this.selectedDog = dog;
     },

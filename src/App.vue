@@ -7,6 +7,8 @@
 import GetDogs from './components/GetDogs.vue'
 import DogDetails from './components/DogDetails.vue'  
 
+//const API_KEY = "live_zp98sjWc8WpkkxNXJ5feMRMMDpe1dw5KNMC33VRxxGQXC9z06a5dlWMYouk4yLHj";
+
 export default {
   name: 'App',
   components: {

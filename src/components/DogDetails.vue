@@ -1,12 +1,7 @@
 <template>
     <div class="card">
-      <img  :src="dog.url" alt="dog photo"/>
+      <img class="dog-image"  :src="dog.image.url" alt="dog photo"/> 
       <h2>{{ dog.name }}</h2> 
-      <ul>
-      <li v-for="event in events" :key="event">
-        111{{ event.date }}: {{ event.description }}
-      </li>
-    </ul> 
       <p>Id: {{ dog.id }}</p>  
       <p v-if="dog.breed_group"><span style="font-weight:bold;">Breed:</span> {{ dog.breed_group }} </p>
       <p>{{ dog.life_span }} average life span</p> 
@@ -15,13 +10,10 @@
     </div>
 </template>
   
-<script lang="js"> 
+<script> 
   export default {
-    props: {
-    dog: {
-      type: Object,
-      required: true
-    }
+    props: {  
+    dog: Object, 
     }
   }
 </script>
@@ -37,6 +29,12 @@
   padding: 4%;
   font-size: 90%;
   background-color: rgb(137, 204, 137);
+}
+
+.dog-image{
+  width: 99%;
+  height: auto;
+  margin: 1%;
 }
 
 .close-button{
