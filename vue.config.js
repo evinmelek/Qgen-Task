@@ -12,5 +12,5 @@ module.exports = {
         swDest: 'service-worker.js',
         exclude: [/_redirects/]
       }
-    }
+    }, 
 }
